@@ -12,4 +12,8 @@ public class ApplicationDbContext : DbContext
     }
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Address> addresses { get; set; }
+    public DbSet<CourseOffering> CourseOfferings { get; set; }
+    public DbSet<Registeration> Registerations { get; set; }
+    public DbSet<StudentDetails> StudentDetails { get; set; }
 }
