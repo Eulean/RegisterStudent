@@ -15,7 +15,7 @@ public class User
     public string Password { get; set; }
     public string Role { get; set; }  // Admin , Student
 
-    public Address Address { get; set; } 
+    public Address? Address { get; set; } 
     
 
 }

@@ -4,30 +4,22 @@
     ViewData["Title"] = "Login";
 }
 
-
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form method="post">
-                <h2>Login</h2>
-                <hr />
-
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                <div class="form-floating">
-                    <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" />
-                    <label asp-for="Email" class="form-label"></label>
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-
-                <div class="form-floating">
-                    <input asp-for="Password" class="form-control" autocomplete="current-password" aria-required="true" />
-                     <label asp-for="Password" class="form-label"></label>
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-
-                <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Login</button>
-            </form>
-        </section>
+<h2>Login</h2>
+<form method="post" asp-action="Login">
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
-</div>
+    <div class="form-group">
+        <label asp-for="Password">Password</label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+@if (TempData["Error"] != null)  // Handle errors from controller (optional)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
