@@ -11,8 +11,8 @@ using StudentRegisteration.Data;
 namespace StudentRegisteration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240318074521_somemodelsstart")]
-    partial class somemodelsstart
+    [Migration("20240319040713_changesToUser")]
+    partial class changesToUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

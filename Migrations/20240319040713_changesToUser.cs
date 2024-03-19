@@ -5,7 +5,7 @@
 namespace StudentRegisteration.Migrations
 {
     /// <inheritdoc />
-    public partial class somemodelsstart : Migration
+    public partial class changesToUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
