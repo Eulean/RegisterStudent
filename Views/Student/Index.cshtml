@@ -1,1 +1,12 @@
-<h1>Index</h1>
+@model List<StudentRegisteration.ViewModels.StudentViewModel>
+
+<h2>Student</h2>
+
+@foreach (var student in Model)
+{
+    <h1>@student.Name</h1>
+    <h3>@student.Email</h3>
+    <p>@student.Id</p>
+}
+
+<a class="nav-link text-dark" asp-area="" asp-controller="Student" asp-action="Details">Privacy</a>

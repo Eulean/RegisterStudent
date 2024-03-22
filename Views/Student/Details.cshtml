@@ -1,0 +1,56 @@
+﻿@model StudentRegisteration.ViewModels.DetailsViewModel
+
+@using StudentRegisteration.Models
+
+
+
+@if (Model.StudentDetails.Id == null)
+{
+    <h2>New Student Signup</h2>
+}
+else
+{
+    <h2>Edit Student Details</h2>
+}
+
+<form asp-action="Details" method="post">
+    <div class="form-group">
+        <label asp-for="StudentDetails.FirstName">First Name:</label>
+        <input asp-for="StudentDetails.FirstName" class="form-control" />
+        <span asp-validation-for="StudentDetails.FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StudentDetails.LastName">Last Name:</label>
+        <input asp-for="StudentDetails.LastName" class="form-control" />
+        <span asp-validation-for="StudentDetails.LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="StudentDetails.PhoneNumber">Phone Number:</label>
+        <input asp-for="StudentDetails.PhoneNumber" class="form-control" />
+        <span asp-validation-for="StudentDetails.PhoneNumber" class="text-danger"></span>
+    </div>
+
+    @Html.HiddenFor(m => m.StudentDetails.Id)
+   
+
+    <button type="submit" class="btn btn-primary">Save Details</button>
+</form>
+
+<h2>Registrations</h2>
+
+
+@if (Model.Registerations.Any())
+{
+    <ul>
+        @foreach (var registration in Model.Registerations)
+        {
+            <li>
+                @registration.CourseOffering.Course
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No registrations found.</p>
+}

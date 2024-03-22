@@ -1,25 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Java\\C#Code\\new\\RegisterStudent\\",
+  "WorkspaceRootPath": "D:\\Java\\C#Code\\project\\RegisterStudent\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|d:\\java\\c#code\\new\\registerstudent\\viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|solutionrelative:viewmodels\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|d:\\java\\c#code\\new\\registerstudent\\viewmodels\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|solutionrelative:viewmodels\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|d:\\java\\c#code\\new\\registerstudent\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|d:\\java\\c#code\\new\\registerstudent\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|d:\\java\\c#code\\project\\registerstudent\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|solutionrelative:controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|d:\\java\\c#code\\new\\registerstudent\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|d:\\java\\c#code\\project\\registerstudent\\viewmodels\\detailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|solutionrelative:viewmodels\\detailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|d:\\java\\c#code\\project\\registerstudent\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6E416545-81F4-4204-8443-1057A84F82AE}|StudentRegisteration.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -30,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,67 +30,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "LoginViewModel.cs",
-              "DocumentMoniker": "D:\\Java\\C#Code\\new\\RegisterStudent\\ViewModels\\LoginViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModels\\LoginViewModel.cs",
-              "ToolTip": "D:\\Java\\C#Code\\new\\RegisterStudent\\ViewModels\\LoginViewModel.cs",
-              "RelativeToolTip": "ViewModels\\LoginViewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAtAAAA",
+              "DocumentIndex": 1,
+              "Title": "DetailsViewModel.cs",
+              "DocumentMoniker": "D:\\Java\\C#Code\\project\\RegisterStudent\\ViewModels\\DetailsViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\DetailsViewModel.cs",
+              "ToolTip": "D:\\Java\\C#Code\\project\\RegisterStudent\\ViewModels\\DetailsViewModel.cs",
+              "RelativeToolTip": "ViewModels\\DetailsViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T07:38:56.687Z",
+              "WhenOpened": "2024-03-22T10:14:20.36Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RegisterVIewModel.cs",
-              "DocumentMoniker": "D:\\Java\\C#Code\\new\\RegisterStudent\\ViewModels\\RegisterVIewModel.cs",
-              "RelativeDocumentMoniker": "ViewModels\\RegisterVIewModel.cs",
-              "ToolTip": "D:\\Java\\C#Code\\new\\RegisterStudent\\ViewModels\\RegisterVIewModel.cs",
-              "RelativeToolTip": "ViewModels\\RegisterVIewModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "StudentController.cs",
+              "DocumentMoniker": "D:\\Java\\C#Code\\project\\RegisterStudent\\Controllers\\StudentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StudentController.cs",
+              "ToolTip": "D:\\Java\\C#Code\\project\\RegisterStudent\\Controllers\\StudentController.cs",
+              "RelativeToolTip": "Controllers\\StudentController.cs",
+              "ViewState": "AQIAAFEAAAAAAAAAAAAewHgAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T07:38:55.59Z",
+              "WhenOpened": "2024-03-22T09:26:47.414Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "D:\\Java\\C#Code\\new\\RegisterStudent\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "D:\\Java\\C#Code\\new\\RegisterStudent\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T07:38:52.249Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "StudentController.cs",
-              "DocumentMoniker": "D:\\Java\\C#Code\\new\\RegisterStudent\\Controllers\\StudentController.cs",
-              "RelativeDocumentMoniker": "Controllers\\StudentController.cs",
-              "ToolTip": "D:\\Java\\C#Code\\new\\RegisterStudent\\Controllers\\StudentController.cs",
-              "RelativeToolTip": "Controllers\\StudentController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T07:38:51.291Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\Java\\C#Code\\new\\RegisterStudent\\Controllers\\UserController.cs",
+              "DocumentMoniker": "D:\\Java\\C#Code\\project\\RegisterStudent\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "D:\\Java\\C#Code\\new\\RegisterStudent\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\Java\\C#Code\\project\\RegisterStudent\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AQIAAEoAAAAAAAAAAAAQwGkAAAAEAAAA",
+              "ViewState": "AQIAAE0AAAAAAAAAAAAQwG0AAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T07:33:25.355Z",
+              "WhenOpened": "2024-03-22T09:26:42.391Z",
               "EditorCaption": ""
             }
           ]

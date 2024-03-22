@@ -52,7 +52,8 @@ public class UserController : Controller
             Name = model.Name,
             Email = model.Email,
             Password = HashPassword(model.Password),
-            Role = "Student"
+            Role = model.Role
+          //  Role = "Student"
          // Role = "Admin"       // pls change it to Admin Role when you are add/register admin to database
         };
 
@@ -64,7 +65,7 @@ public class UserController : Controller
         }
         catch (DbUpdateException e)
         {
-            ModelState.AddModelError("","An Error occurred.Please Try Again later.");
+            ModelState.AddModelError("e","An Error occurred.Please Try Again later.");
             return View (model);
         }
        
@@ -73,19 +74,20 @@ public class UserController : Controller
         
     }
 
-  
-
     public IActionResult Login()
     {
         return View();
     }
+
+  
+
 
     [HttpPost]
     public IActionResult Login(LoginViewModel model)
     {
         if (!ModelState.IsValid)
         {
-            return View(model);
+            return View(model); // login view with validation errors
         }
 
         var loginUser = _context.Users.FirstOrDefault(u => u.Email == model.Email);
@@ -95,20 +97,34 @@ public class UserController : Controller
             ModelState.AddModelError("Email", "Email doesn't exist");
             return View(model);
         }
-
+// check password
         if (!VerifyPassword( loginUser.Password, model.Password))
         {
             ModelState.AddModelError("Password", "Password is incorrect");
             return View(model);
         }
 
+        HttpContext.Session.SetString("IsLoggedIn", loginUser.Id);
+
+        HttpContext.Session.SetString("UserName", loginUser.Name);
+        HttpContext.Session.SetString("UserEmail", loginUser.Email);
+
     // check Role
-       if(loginUser.Role == "Admin")
+       if (loginUser.Role == "Admin")
        {
-        return Redirect("~/Admin/Index");
+        
+        return RedirectToAction("Index","Admin",model);
        }
-        return Redirect("~/Student/Index");
-        // return RedirectToAction("Index","Student");
+       else if( loginUser.Role == "Student")
+       {
+        
+        return RedirectToAction("Index","Student",model);
+       }
+       else{
+        ModelState.AddModelError("","User has no assigned roles");
+        return View(model);
+       }
+      
     }
 
     // for password hashing

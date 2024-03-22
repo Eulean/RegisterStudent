@@ -1,2 +1,9 @@
+@model List<StudentRegisteration.ViewModels.AdminViewModel>
 
 <h2>Admin</h2>
+
+@foreach(var admin in Model)
+{
+    <h3>@admin.Email</h3>
+    <p>@admin.Id</p>
+    }

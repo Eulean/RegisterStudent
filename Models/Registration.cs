@@ -2,10 +2,10 @@ namespace StudentRegisteration.Models;
 
 public class Registeration
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
     public string RegistrationId { get; set; }
 
-    public int StudentDetailsId { get; set; }
+    public string StudentDetailsId { get; set; }
     public StudentDetails studentDetails { get; set; }
 
     public int CourseOfferingId { get; set; }

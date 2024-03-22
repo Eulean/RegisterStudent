@@ -15,4 +15,6 @@ public class RegisterViewModel
     [Required]
     [DataType(DataType.Password)]
     public string Password { get; set; } 
+
+    public string Role  {get;set;} //= "Student"; //
 }

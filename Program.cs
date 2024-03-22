@@ -13,6 +13,8 @@ options
     .UseSqlServer(builder.Configuration
     .GetConnectionString("DefaultConnection")));
 
+builder.Services.AddSession();
+
 // Cookies 
 // builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 //     .AddCookie(options =>
@@ -37,6 +39,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

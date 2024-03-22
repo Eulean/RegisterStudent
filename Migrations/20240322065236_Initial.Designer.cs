@@ -12,8 +12,8 @@ using StudentRegisteration.Data;
 namespace StudentRegisteration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240319051837_changesToUserAgain")]
-    partial class changesToUserAgain
+    [Migration("20240322065236_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -80,11 +80,8 @@ namespace StudentRegisteration.Migrations
 
             modelBuilder.Entity("StudentRegisteration.Models.Registeration", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CourseOfferingId")
                         .HasColumnType("int");
@@ -97,8 +94,9 @@ namespace StudentRegisteration.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StudentDetailsId")
-                        .HasColumnType("int");
+                    b.Property<string>("StudentDetailsId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -111,17 +109,18 @@ namespace StudentRegisteration.Migrations
 
             modelBuilder.Entity("StudentRegisteration.Models.StudentDetails", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
