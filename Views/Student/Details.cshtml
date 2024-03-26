@@ -1,56 +1,82 @@
 ﻿@model StudentRegisteration.ViewModels.DetailsViewModel
 
-@using StudentRegisteration.Models
+<div>
+    <h2>Student Information</h2>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Name:</dt>
+        <dd class="col-sm-10">@Model.UserName</dd> <!-- Null check for User -->
+        <dt class="col-sm-2">Email:</dt>
+        <dd class="col-sm-10">@Model.UserEmail</dd> <!-- Null check for User -->
+    </dl>
+</div>
 
+<div>
+    <h4>Student Details</h4>
+    <hr />
+    <form asp-action="Details" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="StudentDetails.Name" class="control-label"></label>
+            <input asp-for="StudentDetails.Name" class="form-control" />
+            <span asp-validation-for="StudentDetails.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentDetails.Email" class="control-label"></label>
+            <input asp-for="StudentDetails.Email" class="form-control" />
+            <span asp-validation-for="StudentDetails.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentDetails.PhoneNumber" class="control-label"></label>
+            <input asp-for="StudentDetails.PhoneNumber" class="form-control" />
+            <span asp-validation-for="StudentDetails.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentDetails.Address.City" class="control-label"></label>
+            <input asp-for="StudentDetails.Address.City" class="form-control" />
+            <span asp-validation-for="StudentDetails.Address.City" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentDetails.Address.Town" class="control-label"></label>
+            <input asp-for="StudentDetails.Address.Town" class="form-control" />
+            <span asp-validation-for="StudentDetails.Address.Town" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="StudentDetails.Address.State" class="control-label"></label>
+            <input asp-for="StudentDetails.Address.State" class="form-control" />
+            <span asp-validation-for="StudentDetails.Address.State" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
 
-
-@if (Model.StudentDetails.Id == null)
-{
-    <h2>New Student Signup</h2>
-}
-else
-{
-    <h2>Edit Student Details</h2>
-}
-
-<form asp-action="Details" method="post">
-    <div class="form-group">
-        <label asp-for="StudentDetails.FirstName">First Name:</label>
-        <input asp-for="StudentDetails.FirstName" class="form-control" />
-        <span asp-validation-for="StudentDetails.FirstName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentDetails.LastName">Last Name:</label>
-        <input asp-for="StudentDetails.LastName" class="form-control" />
-        <span asp-validation-for="StudentDetails.LastName" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="StudentDetails.PhoneNumber">Phone Number:</label>
-        <input asp-for="StudentDetails.PhoneNumber" class="form-control" />
-        <span asp-validation-for="StudentDetails.PhoneNumber" class="text-danger"></span>
-    </div>
-
-    @Html.HiddenFor(m => m.StudentDetails.Id)
-   
-
-    <button type="submit" class="btn btn-primary">Save Details</button>
-</form>
-
-<h2>Registrations</h2>
-
-
-@if (Model.Registerations.Any())
-{
-    <ul>
-        @foreach (var registration in Model.Registerations)
-        {
-            <li>
-                @registration.CourseOffering.Course
-            </li>
-        }
-    </ul>
-}
-else
-{
-    <p>No registrations found.</p>
-}
+<div>
+    <h4>Registrations</h4>
+    <hr />
+    @if (Model.Registerations != null && Model.Registerations.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Registration ID</th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var registration in Model.Registerations)
+                {
+                    <tr>
+                        <td>@registration.RegistrationId</td>
+                        <!-- Add more columns as needed -->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No registrations found.</p>
+    }
+</div>

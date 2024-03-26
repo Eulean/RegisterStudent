@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using StudentRegisteration.Data;
+using StudentRegisteration.Interfaces;
 using StudentRegisteration.Models;
+using StudentRegisteration.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,21 +15,20 @@ options
     .UseSqlServer(builder.Configuration
     .GetConnectionString("DefaultConnection")));
 
+// Add Session
 builder.Services.AddSession();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.Configure<SessionOptions>(option =>
+{
+    option.IdleTimeout = TimeSpan.FromMinutes(30);  
+    
+});
 
-// Cookies 
-// builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//     .AddCookie(options =>
-//     {
-//         options.LoginPath = "/User/Login";
-//         options.ExpireTimeSpan = TimeSpan.FromMinutes(1);
-//         options.Cookie = options => 
-//         {
-//             options.HttpOnly = true;
-//             options.Secure = true;
-//         };
-        
-//     });
+
+// interface and Service implamination
+builder.Services.AddScoped<IAddressService, AddressServices>();
+builder.Services.AddScoped<ICourseService, CourseService>();
+
 
 var app = builder.Build();
 
@@ -40,6 +41,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseSession();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

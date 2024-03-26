@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using StudentRegisteration.Data;
 using StudentRegisteration.Models;
 using StudentRegisteration.ViewModels;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace StudentRegisteration.Controllers;
 
@@ -27,98 +29,170 @@ public class StudentController : Controller
             return RedirectToAction("Login", "User");
         }
 
-     /*   if(!User.Identity.IsAuthenticated)
-        {
-            return RedirectToAction("Login", "User");
-        }*/
-
         return RedirectToAction("Details");
 
-        /*var student = _context.Users.Where(u => u.Role == "Student").Select(u => new StudentViewModel
-        {
-            Name = u.Name,
-            Email = u.Email,
-            Id = u.Id,
-        }).ToList();
-        return View(student);*/
+      
     }
 
-    public IActionResult Details()
+    
+    // public async Task<IActionResult> Details()
+    // {
+    //     var userId = HttpContext.Session.GetString("IsLoggedIn");
+
+    //     if (userId == null)
+    //     {
+    //         return RedirectToAction("Login", "User");
+    //     }
+
+    //     var studentDetails = await _context.StudentDetails
+    //         .Include(sd => sd.Registerations)
+    //         .FirstOrDefaultAsync(sd => sd.UserId == userId);
+
+    //     var detailsViewModel = new DetailsViewModel(studentDetails); // Use constructor to exclude User
+
+    //     if (studentDetails != null)
+    //     {
+    //         detailsViewModel.UserName = studentDetails.User?.Name;
+    //         detailsViewModel.UserEmail = studentDetails.User?.Email;
+    //     }
+
+    //     HttpContext.Session.SetString("DetailsViewModel", JsonConvert.SerializeObject(detailsViewModel));
+
+    //     return View(detailsViewModel);
+    // }
+
+    // [HttpPost]
+    // public async Task<IActionResult> Details(DetailsViewModel detailsViewModel)
+    // {
+    //     if (ModelState.IsValid)
+    //     {
+    //         // Update only the StudentDetails object from the view model
+    //         _context.StudentDetails.Update(detailsViewModel.StudentDetails);
+    //         await _context.SaveChangesAsync();
+    //         return RedirectToAction("Details");
+    //     }
+    //     return View(detailsViewModel);
+    // }
+
+    public async Task<IActionResult> Details()
     {
 
         var userId = HttpContext.Session.GetString("IsLoggedIn");
-        var userName = HttpContext.Session.GetString("UserName");
-        var userEmail = HttpContext.Session.GetString("UserEmail");
 
         if (userId == null)
         {
             return RedirectToAction("Login", "User");
         }
 
-        var user = new User
-        {
-            Id = userId,
-            Name = userName,
-            Email = userEmail,
-        };
-
-        var studentDetails = _context.StudentDetails.FirstOrDefault(sd => sd.Id == userId);
-
+        var studentDetails = await _context.StudentDetails
+            // .Include(sd => sd.User)
+            .Include(sd => sd.Address)
+            .Include(sd => sd.Registerations)
+            .FirstOrDefaultAsync(sd => sd.UserId == userId);
+            
         if(studentDetails == null)
         {
+            var user = await _context.Users.FindAsync(userId); 
+
+            if(user == null )
+            {
+                ModelState.AddModelError("User", "No User Found!");
+                return View(user);
+            }
+
+            var userName = user?.Name;
+            var userEmail = user?.Email;
+       
             studentDetails = new StudentDetails
             {
-                Id = userId,
+                Id = Guid.NewGuid().ToString(),
+                UserId = userId,
+                Name = userName,
+                Email = userEmail,            
+                Address = new Address
+                {
+                  
+                    City = "Yangon",
+                    Town = "Dagon",
+                    State = "Yangon",
+                    
+                    
+                }
+
                 
             };
 
         }
 
-        var registrations = _context.Registerations
-            .Where(r => r.StudentDetailsId == userId)
-            .ToList();
-
-
-        // combine studentdetails and registration into a view model
-
         var detailsViewModel = new DetailsViewModel
         {
-            User = user,
+            UserName = studentDetails.Name,
+            UserEmail = studentDetails.Email,
             StudentDetails = studentDetails,
-            Registerations = registrations,
+            Address = studentDetails.Address,
+            Registerations = studentDetails.Registerations != null && studentDetails.Registerations.Any()
+                ? studentDetails.Registerations.ToList()
+                : new List<Registeration>(),
         };
 
-        HttpContext.Session.SetString("DetailsViewModel", JsonConvert.SerializeObject(detailsViewModel));
+       
 
-        /*   //try to store in tempdata
-           TempData["DetailsViewModel"] = detailsViewModel;
-           TempData["OriginalDetailsViewModel"] = detailsViewModel;*/
-
+        // HttpContext.Session.SetString("DetailsViewModel", JsonConvert.SerializeObject(detailsViewModel));
 
         return View(detailsViewModel);
     }
 
     [HttpPost]
-    public IActionResult Details(DetailsViewModel detailsViewModel)
+    public async Task<IActionResult> Details(DetailsViewModel detailsViewModel)
     {
-        if(ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            
+            foreach (var error in errors)
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
+         }  
+         else
+         {
+            // var serializedDetailsViewModel = HttpContext.Session.GetString("DetailsViewModel");
+
+            var serializedDetailsViewModel = SerializeObjectIgnoreNull(detailsViewModel);
+            
+            HttpContext.Session.SetString("DetailsViewModel",serializedDetailsViewModel);
+
+            var originalDetailsViewModel = JsonConvert.DeserializeObject<DetailsViewModel>(serializedDetailsViewModel);
+
+    
+
+            originalDetailsViewModel.StudentDetails.Name = detailsViewModel.StudentDetails.Name;
+            originalDetailsViewModel.StudentDetails.Email = detailsViewModel.StudentDetails.Email;
+            originalDetailsViewModel.StudentDetails.PhoneNumber = detailsViewModel.StudentDetails.PhoneNumber;
+            originalDetailsViewModel.StudentDetails.Address.City = detailsViewModel.StudentDetails.Address.City;
+            originalDetailsViewModel.StudentDetails.Address.Town = detailsViewModel.StudentDetails.Address.Town;
+            originalDetailsViewModel.StudentDetails.Address.State = detailsViewModel.StudentDetails.Address.State;
+
+
             _context.StudentDetails.Update(detailsViewModel.StudentDetails);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return RedirectToAction("Details");
-        }
-
-        var serializedDetailsViewModel = HttpContext.Session.GetString("DetailsViewModel");
-
-        if(serializedDetailsViewModel != null)
-        {
-            detailsViewModel = JsonConvert.DeserializeObject<DetailsViewModel>(serializedDetailsViewModel);
-
-        }
-       
-
+         }
+            
+        
         return View(detailsViewModel);
     }
+
+    private string SerializeObjectIgnoreNull(object obj)
+    {
+        var json = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore
+        };
+        return JsonConvert.SerializeObject(obj, json);
+    }
+
+
 
     public IActionResult RegistrationCourse()
     {

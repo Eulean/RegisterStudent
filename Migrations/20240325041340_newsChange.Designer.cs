@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentRegisteration.Data;
 
@@ -10,9 +11,11 @@ using StudentRegisteration.Data;
 namespace StudentRegisteration.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240325041340_newsChange")]
+    partial class newsChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,6 +41,7 @@ namespace StudentRegisteration.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StudentDetailsId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Town")
@@ -47,10 +51,9 @@ namespace StudentRegisteration.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("StudentDetailsId")
-                        .IsUnique()
-                        .HasFilter("[StudentDetailsId] IS NOT NULL");
+                        .IsUnique();
 
-                    b.ToTable("addresses", (string)null);
+                    b.ToTable("addresses");
                 });
 
             modelBuilder.Entity("StudentRegisteration.Models.CourseOffering", b =>
@@ -78,7 +81,7 @@ namespace StudentRegisteration.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CourseOfferings", (string)null);
+                    b.ToTable("CourseOfferings");
                 });
 
             modelBuilder.Entity("StudentRegisteration.Models.Registeration", b =>
@@ -107,7 +110,7 @@ namespace StudentRegisteration.Migrations
 
                     b.HasIndex("StudentDetailsId");
 
-                    b.ToTable("Registerations", (string)null);
+                    b.ToTable("Registerations");
                 });
 
             modelBuilder.Entity("StudentRegisteration.Models.StudentDetails", b =>
@@ -133,10 +136,9 @@ namespace StudentRegisteration.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("UserId");
 
-                    b.ToTable("StudentDetails", (string)null);
+                    b.ToTable("StudentDetails");
                 });
 
             modelBuilder.Entity("StudentRegisteration.Models.User", b =>
@@ -162,16 +164,18 @@ namespace StudentRegisteration.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("StudentRegisteration.Models.Address", b =>
                 {
-                    b.HasOne("StudentRegisteration.Models.StudentDetails", "StudentDetails")
+                    b.HasOne("StudentRegisteration.Models.StudentDetails", "studentDetails")
                         .WithOne("Address")
-                        .HasForeignKey("StudentRegisteration.Models.Address", "StudentDetailsId");
+                        .HasForeignKey("StudentRegisteration.Models.Address", "StudentDetailsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("StudentDetails");
+                    b.Navigation("studentDetails");
                 });
 
             modelBuilder.Entity("StudentRegisteration.Models.Registeration", b =>
@@ -196,8 +200,8 @@ namespace StudentRegisteration.Migrations
             modelBuilder.Entity("StudentRegisteration.Models.StudentDetails", b =>
                 {
                     b.HasOne("StudentRegisteration.Models.User", "User")
-                        .WithOne("StudentDetails")
-                        .HasForeignKey("StudentRegisteration.Models.StudentDetails", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -215,11 +219,6 @@ namespace StudentRegisteration.Migrations
                         .IsRequired();
 
                     b.Navigation("Registerations");
-                });
-
-            modelBuilder.Entity("StudentRegisteration.Models.User", b =>
-                {
-                    b.Navigation("StudentDetails");
                 });
 #pragma warning restore 612, 618
         }
