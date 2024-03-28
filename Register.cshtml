@@ -1,0 +1,112 @@
+@model StudentRegisteration.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+@* <h1>Register</h1>
+
+<form method="post" asp-action="Register">
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Password</label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="role">Role</label>
+        <select id="role" name="role" class="form-control">
+            <option value="">Select Role</option>
+            <option value="Admin">Admin</option>
+            <option value="Student">Student</option>
+            </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+@if (TempData["Error"] != null)  // Handle errors from controller (optional)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+} *@
+
+@* <form asp-controller="User" asp-action="Register" method="post">
+
+    <div> 
+         <label asp-for="Name"></label>
+  <input asp-for="Name" />
+  <span asp-validation-for="Name"></span>
+  </div>
+    <div>
+         <label asp-for="Email"></label>
+  <input asp-for="Email" />
+  <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+         <label asp-for="Password"></label>
+  <input asp-for="Password" />
+  <span asp-validation-for="Password"></span>
+    </div>
+ 
+
+  <button type="submit">Register</button>
+
+
+</form> *@
+
+<section class="vh-100">
+    <div class="container py-5">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="~/images/signup.svg"
+                     class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <form method="post" asp-action="Register">
+                    <!-- Name input -->
+                    <div class="form-outline mb-4 form-group">
+                        <label class="form-label" for="" asp-for="Name">Name</label>
+                        <input id="" class="form-control form-control-lg" asp-for="Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <!-- Email input -->
+                    <div class="form-outline mb-4 form-group">
+                        <label class="form-label" for="" asp-for="Email">Email Address</label>
+                        <input type="email" id="" class="form-control form-control-lg" asp-for="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-outline mb-4 form-group">
+                        <label class="form-label" for="" asp-for="Password">Password</label>
+                        <input type="password" id="" class="form-control form-control-lg" asp-for="Password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <!-- Role input -->
+                    <div class="form-outline mb-4 form-group">
+                        <label for="role" class="form-label">Role</label>
+                        <select id="role" name="role" class="form-select form-control-lg fs-6">
+                            <option value="" class="fs-6">Select Role</option>
+                            <option value="Admin" class="fs-6">Admin</option>
+                            <option value="Student" class="fs-6">Student</option>
+                        </select>
+                    </div>
+                    <!-- Submit button -->
+                    <button type="submit" class="btn btn-primary btn-lg btn-block fs-6 mt-2" style="width: 440px;">Sign Up</button>
+                </form>
+                @if (TempData["Error"] != null)  // Handle errors from controller (optional)
+                {
+                    <div class="alert alert-danger">@TempData["Error"]</div>
+                }
+        
+            </div>
+        </div>
+    </div>
+</section>
